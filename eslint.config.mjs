@@ -6,7 +6,10 @@ export default [
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.jest, // Adds Jest globals like `test`, `jest`, and `expect`
+      },
     },
     settings: {
       react: {
