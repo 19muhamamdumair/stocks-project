@@ -1,4 +1,5 @@
 // src/pages/Main.test.js
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import MainPage from "./index";
 import useStocks from "../../hooks/useStocks";
