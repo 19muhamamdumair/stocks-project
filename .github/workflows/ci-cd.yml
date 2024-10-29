@@ -1,0 +1,55 @@
+name: CI/CD Pipeline for React TypeScript
+
+on:
+  push:
+    branches:
+      - main  # Triggers the workflow on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Triggers the workflow on pull requests to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'  # Specify the Node.js version
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Linting
+      - name: Run Linting
+        run: npm run lint
+
+      # Step 5: Run Tests
+      - name: Run Tests
+        run: npm test
+
+      # Step 6: Build Project
+      - name: Build Project
+        run: npm run build
+
+  deploy:
+    needs: build  # Ensures deploy runs after a successful build job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'  # Only deploy on main branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build  # Specify the build directory

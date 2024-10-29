@@ -1,0 +1,26 @@
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+
+    label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #444;
+    }
+
+    input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 1rem;
+        transition: border-color 0.3s ease-in-out;
+
+        &:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+    }
+}
